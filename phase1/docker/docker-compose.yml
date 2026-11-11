@@ -1,0 +1,54 @@
+# GIS 复刻 Phase 1：发布管理 MVP（Docker 部署）
+#
+# 用法：
+#   docker compose -f phase1/docker/docker-compose.yml up --build
+#   打开 http://localhost:8090
+#
+# 两个容器：
+#   app — 发布台 Web + MapServer/MapCache 网关（Ubuntu + apt 原版 GIS 栈）
+#   db  — PostGIS 16（矢量数据入库用；postgis 镜像启动时自动建 PostGIS 扩展）
+#
+# 数据持久化在命名卷里：gis-data（上传的数据 + 生成的 mapfile/mapcache.xml）、
+# gis-cache（MapCache 瓦片缓存）、pgdata（PostGIS 数据）。
+
+services:
+  app:
+    build:
+      context: ../..
+      dockerfile: phase1/docker/Dockerfile.app
+    ports:
+      - "8090:8090"
+    environment:
+      MAP_PORT: "8090"
+      MAP_BASE_URL: "http://localhost:8090"
+      PGHOST: db
+      PGPORT: "5432"
+      PGDATABASE: gisdb
+      PGUSER: gis
+      PGPASSWORD: gis
+    volumes:
+      - gis-data:/data
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  db:
+    image: postgis/postgis:16-3.4
+    environment:
+      POSTGRES_DB: gisdb
+      POSTGRES_USER: gis
+      POSTGRES_PASSWORD: gis
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U gis -d gisdb"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    restart: unless-stopped
+
+volumes:
+  gis-data:
+  gis-cache:
+  pgdata:

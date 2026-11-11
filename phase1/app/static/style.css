@@ -1,0 +1,40 @@
+* { box-sizing: border-box; }
+body { font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  margin: 0; background: #f4f6f8; color: #222; }
+header { background: #143c8c; color: #fff; padding: 20px 28px; }
+header h1 { margin: 0; font-size: 22px; }
+.sub { margin: 6px 0 0; opacity: .85; font-size: 13px; }
+main { max-width: 960px; margin: 0 auto; padding: 20px; }
+.card { background: #fff; border-radius: 10px; padding: 20px 24px;
+  margin-bottom: 20px; box-shadow: 0 1px 4px rgba(0,0,0,.08); }
+.card h2 { margin: 0 0 14px; font-size: 17px; }
+form label { display: block; margin-bottom: 12px; font-size: 14px; }
+form input[type=text], form input:not([type]), form select,
+form input[type=number] { width: 100%; padding: 8px; margin-top: 4px;
+  border: 1px solid #ccc; border-radius: 6px; font-size: 14px; }
+form input[type=file] { margin-top: 4px; }
+.style-row { display: flex; gap: 16px; }
+.style-row label { flex: 1; }
+button[type=submit] { background: #143c8c; color: #fff; border: 0;
+  padding: 10px 22px; border-radius: 6px; font-size: 15px; cursor: pointer; }
+button[type=submit]:disabled { opacity: .5; cursor: default; }
+.hidden { display: none; }
+.msg { margin: 10px 0 0; font-size: 14px; }
+.ok-text { color: #1a7a3a; }
+.err-text { color: #c0392b; }
+.muted { color: #888; font-size: 13px; }
+.service { border: 1px solid #e3e6ea; border-radius: 8px; padding: 14px;
+  margin-bottom: 14px; }
+.svc-head { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.badge { font-size: 12px; padding: 2px 8px; border-radius: 20px; background: #eef1f5; }
+.badge.raster { background: #e3ecfa; color: #143c8c; }
+.badge.vector { background: #e6f4ea; color: #1a7a3a; }
+.badge.tiles { background: #fdf1e0; color: #9a6a00; }
+.badge.ok { background: #e6f4ea; color: #1a7a3a; }
+.badge.err { background: #fdecea; color: #c0392b; }
+.del { margin-left: auto; background: #fff; color: #c0392b;
+  border: 1px solid #e8b4ae; border-radius: 6px; padding: 4px 10px; cursor: pointer; }
+.preview { display: block; max-width: 100%; margin-top: 10px;
+  border: 1px solid #e3e6ea; border-radius: 6px; background: #fff; }
+.endpoints { font-size: 13px; margin: 10px 0 0; word-break: break-all; }
+.endpoints a { color: #143c8c; margin-right: 12px; }

@@ -1,0 +1,14 @@
+# 生成物与本地数据（不进仓库）
+phase1/app/services.db
+phase1/app/__pycache__/
+phase1/maps/*
+!phase1/maps/.gitkeep
+phase1/data/*
+!phase1/data/.gitkeep
+phase1/cache/*
+!phase1/cache/.gitkeep
+phase0/out/
+phase0/cache/
+phase0/cgi-bin/
+*.pyc
+__pycache__/

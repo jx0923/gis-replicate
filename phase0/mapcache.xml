@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Phase 0 MapCache：WMTS/TMS 切片服务，源是本地 MapServer WMS -->
+<mapcache>
+  <cache name="disk" type="disk">
+    <base>/home/hatch/workspace/gis-replicate/phase0/cache</base>
+  </cache>
+
+  <source name="phase0-wms" type="wms">
+    <getmap>
+      <params>
+        <FORMAT>image/png</FORMAT>
+        <LAYERS>base_raster,parks,roads</LAYERS>
+        <MAP>/home/hatch/workspace/gis-replicate/phase0/phase0.map</MAP>
+      </params>
+    </getmap>
+    <http>
+      <url>http://localhost:8080/cgi-bin/mapserv</url>
+    </http>
+  </source>
+
+  <!-- EPSG:4326 格网，覆盖测试数据范围；z0 一张 256px 瓦片正好 0.2 度 -->
+  <grid name="wgs84">
+    <srs>EPSG:4326</srs>
+    <units>dd</units>
+    <extent>116.30 39.85 116.50 40.00</extent>
+    <size>256 256</size>
+    <resolutions>0.00078125 0.000390625 0.0001953125 0.00009765625</resolutions>
+  </grid>
+
+  <tileset name="phase0">
+    <source>phase0-wms</source>
+    <cache>disk</cache>
+    <grid>wgs84</grid>
+    <format>PNG</format>
+    <metatile>1 1</metatile>
+    <metabuffer>0</metabuffer>
+    <expires>3600</expires>
+  </tileset>
+
+  <service type="wmts" enabled="true"/>
+  <service type="tms" enabled="true"/>
+  <service type="wms" enabled="true"/>
+  <service type="demo" enabled="true"/>
+</mapcache>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GIS 发布台 — Phase 1 MVP</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header>
+  <h1>GIS 发布台</h1>
+  <p class="sub">Phase 1 MVP · MapServer + MapCache + PostGIS · 上传数据，一键发布成 OGC 服务</p>
+</header>
+
+<main>
+  <section class="card">
+    <h2>发布新服务</h2>
+    <form id="publish-form">
+      <label>服务名 <input name="name" required maxlength="60" placeholder="例如：朝阳公园"></label>
+      <label>类型
+        <select name="type" id="type-select">
+          <option value="raster">影像（GeoTIFF → WMS）</option>
+          <option value="vector">矢量（GeoJSON / Shapefile zip → WMS + WFS）</option>
+          <option value="tiles">切片（从已发布服务切 WMTS）</option>
+        </select>
+      </label>
+      <label id="file-label">数据文件 <input type="file" name="file" id="file-input" accept=".tif,.tiff,.geojson,.json,.zip"></label>
+      <label id="source-label" class="hidden">源服务
+        <select name="source_slug" id="source-select"></select>
+      </label>
+      <div class="style-row" id="style-row">
+        <label>填充色 <input type="color" name="fill" value="#6496dc"></label>
+        <label>边线色 <input type="color" name="outline" value="#143c8c"></label>
+        <label>线宽 <input type="number" name="width" value="2" min="1" max="10"></label>
+      </div>
+      <button type="submit" id="submit-btn">发布</button>
+      <p id="form-msg" class="msg"></p>
+    </form>
+  </section>
+
+  <section class="card">
+    <h2>已发布服务 <span id="count"></span></h2>
+    <div id="service-list"><p class="muted">加载中…</p></div>
+  </section>
+</main>
+
+<script src="/static/app.js"></script>
+</body>
+</html>
