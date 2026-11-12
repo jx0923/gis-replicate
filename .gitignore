@@ -12,3 +12,4 @@ phase0/cache/
 phase0/cgi-bin/
 *.pyc
 __pycache__/
+restore.log
